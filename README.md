@@ -25,7 +25,7 @@ Without externally provided labels, the network learns invariant representations
     conda env create -f environment.yml
     ```
 
-- Install the local package 'scripts' to allow absolute imports of modules. From directory 'PCInvariance', run:
+- With the activated environment, install the local package 'scripts' to allow absolute imports of modules. From directory 'PCInvariance', run:
     ```bash
     pip install -e .
     ```
