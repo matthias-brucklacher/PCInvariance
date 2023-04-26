@@ -30,10 +30,10 @@ def load_network_accuracy(resultfolder, architectures, n_ipc_list, decode_mode):
         acc_means.update({networkIt: []}) 
         acc_std.update({networkIt: []}) 
         for n_ipcIt in n_ipc_list:
-            with open(resultfolder+f'fig5cd_arch-{architectures[networkIt]}_nipc-{n_ipcIt}/metrics/linear_decoding_accuracy_{decode_mode}_mnist_extended_fast_noise-0_static-None.txt', "rb") as fp:
+            with open(resultfolder+f'fig5cd_arch-{architectures[networkIt]}_nipc-{n_ipcIt}/metrics/linear_decoding_accuracy_{decode_mode}_mnist_extended_fast_noise-0_static-0.txt', "rb") as fp:
                 list = pickle.load(fp)
                 acc_means[networkIt].append(list[-1]) # take value at last training epoch
-            with open(resultfolder+f'fig5cd_arch-{architectures[networkIt]}_nipc-{n_ipcIt}/metrics/linear_decoding_accuracy_{decode_mode}_std_mnist_extended_fast_noise-0_static-None.txt', "rb") as fp:
+            with open(resultfolder+f'fig5cd_arch-{architectures[networkIt]}_nipc-{n_ipcIt}/metrics/linear_decoding_accuracy_{decode_mode}_std_mnist_extended_fast_noise-0_static-0.txt', "rb") as fp:
                 list = pickle.load(fp)
                 acc_std[networkIt].append(list[-1]) # take value at last training epoch
     return acc_means, acc_std
