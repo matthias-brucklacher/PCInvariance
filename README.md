@@ -103,17 +103,18 @@ Without externally provided labels, the network learns invariant representations
 ### **Figure 5c-d. Area 3-representations encode object identity (Part II).**
 - Train networks with standard architecture and with an increased number of neurons. To generate all necessary training runs, replace *n_ipc*, the number of instances per class in the training data, below with [1, 5, 10, 15, 20].
     ```bash
-        python train.py --data mnist_extended_fast.npy --labels labels_mnist_extended.npy --trafos 0 0 0 --resultfolder fig5_arch-[2000-500-30]_nipc-<n_ipc> --epochs 20 --n_runs 4 --use_validation_data 1 --n_instances_per_class_train <n_ipc>
+        python train.py --data mnist_extended_fast.npy --labels labels_mnist_extended.npy --trafos 0 0 0 --resultfolder fig5cd_arch-[2000-500-30]_nipc-<n_ipc> --epochs 20 --n_runs 4 --use_validation_data 1 --n_instances_per_class_train <n_ipc>
     ```
     ```bash
-        python train.py --data mnist_extended_fast.npy --labels labels_mnist_extended.npy --trafos 0 0 0 --resultfolder fig5_arch-[4000-2000-90]_nipc-<n_ipc> --epochs 20 --n_runs 4 --use_validation_data 1 --n_instances_per_class_train <n_ipc>
+        python train.py --data mnist_extended_fast.npy --labels labels_mnist_extended.npy --trafos 0 0 0 --resultfolder fig5cd_arch-[4000-2000-90]_nipc-<n_ipc> --epochs 20 --n_runs 4 --use_validation_data 1 --n_instances_per_class_train <n_ipc>
     ```
 - Then, compute baselines and plot.
     ```bash
     python post_run_analysis/plot_fig5cd.py 
     ```
-    
+<!-- 
 ### **Figure 6. The network develops a hierarchy of timescales comparable to experimental data from rodent visual cortex.**
+-->
 
 ### Figure 7b. Learning of a generative model (Part II). 
 - First, train networks:
@@ -123,6 +124,9 @@ Without externally provided labels, the network learns invariant representations
     python train.py --data mnist_extended_fast.npy --labels labels_mnist_extended.npy --trafos 2 2 2 --resultfolder fig7b_scaling --epochs 20 --n_runs 4
     ```
 - Then
-$ python post_run_analysis/plot_fig7b.py --simulation_id_1 fig7b_translation --simulation_id_2 fig7b_rotation --simulation_id_3 fig7b_scaling
-
+    ```bash
+    python post_run_analysis/plot_fig7b.py --simulation_id_1 fig7b_translation --simulation_id_2 fig7b_rotation --simulation_id_3 fig7b_scaling
+    ```
+<!--
 ### **Figure 8. Reconstruction of partially occluded sequences.**
+-->
