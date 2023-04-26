@@ -274,7 +274,8 @@ class Network(nn.Module):
         # Reshape data to 2d for batch inference
         n_classes, n_instances_per_class, n_trafos, n_frames_per_seq, n_neurons = test_sequences.shape[0], test_sequences.shape[1], test_sequences.shape[2], test_sequences.shape[3], test_sequences.shape[4]
         n_total_frames = n_classes * n_instances_per_class * n_trafos * n_frames_per_seq
-        data = test_sequences.reshape((n_neurons, n_total_frames))
+        data = test_sequences.flatten(start_dim=0, end_dim=3) # -> Shape (n_total_frames, n_neurons) 
+        data = torch.transpose(data, 0, 1) # -> Shape (n_neurons, n_frames)
         batch_size = n_total_frames
         e0_batch, e1_batch, x1_batch, y1_batch, e2_batch, x2_batch, y2_batch, x3_batch, y3_batch = self.init_batches(batch_size) # Reset network
         e0_batch, e1_batch, x1_batch, y1_batch, e2_batch, x2_batch, y2_batch, x3_batch, y3_batch = self(data, inference_steps, e0_batch, e1_batch, x1_batch, y1_batch, e2_batch, x2_batch, y2_batch, x3_batch, y3_batch)
