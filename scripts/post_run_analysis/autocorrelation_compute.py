@@ -19,12 +19,11 @@ def main():
         PATH_TO_WEIGHTS = '../results/intermediate/fig6/weights_run-0/'
         net = Network(size_list=[28*28, 2000, 500, 30], i_rate1=0.05, i_rate2=0.05, i_rate3=0.05, device=device, l_rate=0.00)
         net.load_weights(PATH_TO_WEIGHTS)
-        train_data, _, _, _ = load_data(
-            dataset='autocorrelation_mnist.npy', 
-            labels_filename='labels_autocorrelation_mnist.npy', 
-            n_instances_per_class_train=1,
-            trafos=[0, 0, 0], 
-            device=device)
+        train_data, _, _, _ = load_data(dataset='autocorrelation_mnist.npy', 
+                                        labels_filename='labels_autocorrelation_mnist.npy', 
+                                        n_instances_per_class_train=1,
+                                        trafos=[0, 0, 0], 
+                                        device=device)
         
         # Compute autocorrelations for a given list of populations
         populations = ['e0', 'e1', 'e2','y1', 'y2', 'y3']
@@ -32,8 +31,8 @@ def main():
     
     # Store intermediate results
     AUTOCORR_RESULTFOLDER = '../results/intermediate/fig6/'
-    dict_of_nparrays_to_json(corr_per_lag, AUTOCORR_RESULTFOLDER + 'corr_per_lag_autocorrelation_mnist.npy.json')
-    dict_of_nparrays_to_json(corr_per_lag_and_seq, AUTOCORR_RESULTFOLDER + 'corr_per_lag_and_seq_autocorrelation_mnist.npy.json')
+    dict_of_nparrays_to_json(corr_per_lag, AUTOCORR_RESULTFOLDER + 'corr_per_lag_autocorrelation_mnist.json')
+    dict_of_nparrays_to_json(corr_per_lag_and_seq, AUTOCORR_RESULTFOLDER + 'corr_per_lag_and_seq_autocorrelation_mnist.json')
 
 def autocorrelation(net, data, populations):
     """Compute autocorrelations of neural activity.
