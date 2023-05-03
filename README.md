@@ -114,22 +114,16 @@ Without externally provided labels, the network learns invariant representations
     ```
 
 ### **Figure 6. The network develops a hierarchy of timescales comparable to experimental data from rodent visual cortex.**
-- Train networks
-    ```bash
-        python train.py --data autocorrelation_mnist.npy --labels labels_autocorrelation_mnist.npy --trafos 0 0 0 --resultfolder fig6 --epochs 10   
-    ```
 - Compute autocorrelations
     ```bash
-        python autocorrelation_compute.py
+        python post_run_analysis/autocorrelation_compute.py
     ```
-<!-- 
+     
 - Run statistical analysis and plot autocorrelation decay
-    ```
-        python autocorrelation_analyze.py
+    ```bash
+        python post_run_analysis/autocorrelation_analyze.py
     ```
 
-
--->
 
 ### Figure 7b. Learning of a generative model (Part II). 
 - First, train networks:
