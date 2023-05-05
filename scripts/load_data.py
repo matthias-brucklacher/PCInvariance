@@ -1,12 +1,27 @@
+""" Functions to load data and labels as well as to add noise to them.
+
+"""
 import torch
 import numpy as np
 
-""" 
-Functions to load data and labels as well as to add noise to them.
-"""
-
 def load_data(dataset, n_instances_per_class_train, trafos, labels_filename, device):
+    """Get (visual) input data and labels, split into training and validation.
 
+    Only mnist_extended and mnist_extended_fast contain enough instances for a meaningful validation split.
+
+    Args:
+        dataset (str): Name of the data to be loaded.
+        n_instances_per_class_train (int): Number of instances per class in training dataset (for upscaling experiments).
+        labels_filename (str): Name of labels file.
+        device (torch.device): CPU or GPU.
+
+    Returns:
+        train_data (torch.Tensor): Shape is (n_classes, n_instances_per_class_train, n_trafos, n_frames_per_sequence=6, width * height).
+        validate_data (torch.Tensor): Shape is (n_classes, n_instances_per_class_validation=20, n_trafos, n_frames_per_sequence=6, width * height).
+        train_labels (numpy.ndarray): Shape is (n_classes, n_instances_per_class_train, n_trafos, n_frames_per_sequence=6).
+        validate_labels (numpy.ndarray): Shape is (n_classes, n_instances_per_class_train, n_trafos, n_frames_per_sequence=6).
+
+    """
     PATH_TO_DATA = f'../data/data_preprocessed/{dataset}'
     data = torch.tensor(np.load(PATH_TO_DATA), device=device)
     print("Data " + dataset + " loaded successfully")
@@ -14,7 +29,6 @@ def load_data(dataset, n_instances_per_class_train, trafos, labels_filename, dev
     selected_trafos = list(set(trafos)) # Keep only unique values #[0, 1, 2] # List to specify which transformations are included: 0 - translation, 1 - rotation, 2 - scaling
     if labels_filename in ['smallnorb_labels.npy', 'labels_autocorrelation_mnist.npy']: # These datasets do not contain instances per class to create a validation dataset. 
         n_instances_per_class_validate = 0 
-        print('X')
     else: 
         n_instances_per_class_validate = 20 # Don't change (standardized validation set)
     print(str(n_instances_per_class_train) + ' instances per class in training data')
