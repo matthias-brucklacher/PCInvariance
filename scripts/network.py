@@ -124,11 +124,11 @@ class Network(nn.Module):
             path_to_weights (str): Directory containing the pretrained weights.
 
         """
-        assert [os.path.exists(path_to_weights+weightfile) for weightfile in ['w1.pt', 'w2.pt', 'w3.pt']] == [True, True, True], f'Weights to be loaded not in correct path. Expected at {path_to_weights}'
-        self.input_layer.weights = torch.load(path_to_weights+'w1.pt')
-        self.pclayer1.weights = torch.load(path_to_weights+'w2.pt')
-        self.pclayer2.weights = torch.load(path_to_weights+'w3.pt')
-        print("Successfully loaded pretrained weights from path "+path_to_weights)
+        #assert [os.path.exists(path_to_weights + weightfile) for weightfile in ['w1.pt', 'w2.pt', 'w3.pt']] == [True, True, True], f'Weights to be loaded not in correct path. Expected at {path_to_weights}'
+        self.input_layer.weights = torch.load(path_to_weights + 'w1.pt').to(self.device)
+        self.pclayer1.weights = torch.load(path_to_weights + 'w2.pt').to(self.device)
+        self.pclayer2.weights = torch.load(path_to_weights + 'w3.pt').to(self.device)
+        print("Successfully loaded pretrained weights from path " + path_to_weights)
 
     def save_weights(self, directory):
         """Save network weights.
@@ -330,7 +330,7 @@ class Network(nn.Module):
         # Plot original input and reconstructions from layer 1, layer 2, layer 3.
         maxvalue = torch.max(torch.stack([frame, recon_1, recon_2, recon_3], dim = 0))
         fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows = 1, ncols = 4)
-        data_width = int(np.sqrt(frame.shape[-1].cpu().numpy()))
+        data_width = int(np.sqrt(frame.shape[-1]))
         im = ax1.matshow(frame.reshape(data_width, data_width).cpu(), vmin = 0, vmax = maxvalue)
         ax1.set_title('Original')
         im2 = ax2.matshow(recon_1.reshape(data_width, data_width).cpu(), vmin = 0, vmax = maxvalue)
